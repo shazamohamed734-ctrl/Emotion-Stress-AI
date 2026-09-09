@@ -119,7 +119,7 @@ app_mode = st.radio(
     "⚙️ Choose Operation Mode / اختر وضع التشغيل:", [upload_tab, cam_tab], horizontal=True
 )
 
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml') if hasattr(cv2, 'data') else cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 st.markdown("---")
 enable_voice_fusion = st.checkbox(
