@@ -119,7 +119,15 @@ app_mode = st.radio(
     "⚙️ Choose Operation Mode / اختر وضع التشغيل:", [upload_tab, cam_tab], horizontal=True
 )
 
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml') if hasattr(cv2, 'data') else cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+import urllib.request
+import os
+
+xml_path = 'haarcascade_frontalface_default.xml'
+if not os.path.exists(xml_path):
+    url = 'https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml'
+    urllib.request.urlretrieve(url, xml_path)
+
+face_cascade = cv2.CascadeClassifier(xml_path)
 
 st.markdown("---")
 enable_voice_fusion = st.checkbox(
